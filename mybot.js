@@ -112,6 +112,7 @@ client.on("message", (message) => {
 			break;
 			
 		case 'freg':
+		case 'fr':
 			if (message.channel.id === id1v1) { // don't proceed if freg command is called in the 1v1 channel
 				message.channel.send("Cannot force reg 1v1s");
 				break;
