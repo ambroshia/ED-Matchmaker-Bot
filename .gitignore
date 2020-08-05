@@ -1,0 +1,6 @@
+# don't commit node modules
+node_modules
+
+# don't commit private data
+data.json
+private_data.json
