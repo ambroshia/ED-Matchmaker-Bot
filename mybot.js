@@ -92,6 +92,7 @@ client.on("message", (message) => {
 			break;
 			
 		case 'clear':
+		case 'c':
 			if (checkChannel(message.channel)) { // check that current channel exists in data as valid matchmaking channel
 				data.channels[message.channel.id].peopleInQueue.length = 0;
 				data.channels[message.channel.id].peopleWaitingReroll.length = 0;
@@ -99,6 +100,7 @@ client.on("message", (message) => {
 			}
 			break;
 			
+		case 'reroll':
 		case 'rr':
 			if (checkChannel(message.channel)) { // check that current channel exists in data as valid matchmaking channel				
 				if (data.channels[message.channel.id].peopleWaitingReroll.length < data.channels[message.channel.id].maxPlayerCount) { // check to see whether the reroll queue is full to prevent rerolls of nonexistant matches
