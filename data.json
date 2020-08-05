@@ -1,0 +1,34 @@
+{
+        "prefix": "?",
+        "channels": {
+                "$1V1_CHANNEL_ID": {
+                        "name": "1v1",
+                        "peopleInQueue": [],
+                        "peopleWaitingReroll": [],
+                        "maxPlayerCount": 2
+                },
+                "$2V2_CHANNEL_ID": {
+                        "name": "2v2",
+                        "peopleInQueue": [],
+                        "peopleWaitingReroll": [],
+                        "maxPlayerCount": 4
+                },
+                "$3V3_CHANNEL_ID": {
+                        "name": "3v3",
+                        "peopleInQueue": [],
+                        "peopleWaitingReroll": [],
+                        "maxPlayerCount": 6
+                },
+                "$4V4_CHANNEL_ID": {
+                        "name": "4v4",
+                        "peopleInQueue": [],
+                        "peopleWaitingReroll": [],
+                        "maxPlayerCount": 8
+                },
+                "$CUSTOMS_CHANNEL_ID": {
+                        "name": "customs",
+                        "peopleInQueue": [],
+                        "peopleWaitingReroll": []
+                }
+        }
+}
