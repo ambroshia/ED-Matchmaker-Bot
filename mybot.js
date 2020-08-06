@@ -125,7 +125,15 @@ client.on("message", (message) => {
 					"username": args[0],
 					"freg": true // this boolean will be used later to convert the fake player object into a string to be output into team results
 				}
-				data.channels[message.channel.id].peopleInQueue.push(freg);  
+				
+				for (var i = 0; i < data.channels[message.channel.id].peopleInQueue.length; ++i) { // iterate through the queue and compare username string with freg user
+					if (data.channels[message.channel.id].peopleInQueue[i].username.toLowerCase() == args[0].toLowerCase()) { // compare raw username string of each queue user and freg user
+						message.channel.send(data.channels[message.channel.id].peopleInQueue[i].username + " is already in the " + data.channels[message.channel.id].name + " queue.");
+						return; // this will stop execution of the remainder code
+					}
+				} // NOTE: this still cannot prevent a user being reg twice with one self reg and one freg with the user being mentioned. The two user objects are structured too differently.
+				
+				data.channels[message.channel.id].peopleInQueue.push(freg); // if the check for duplicate players passes, go ahead and freg the user
 				message.channel.send(freg.username + " has been added to the " + data.channels[message.channel.id].name + " queue. " + data.channels[message.channel.id].peopleInQueue.length + " player(s) are in the queue.");
 				checkForMatch(message.channel); // always run a check to see if a match can be made everytime a user is added to the queue
 			}
