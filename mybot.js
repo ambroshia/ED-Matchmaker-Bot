@@ -71,7 +71,7 @@ client.on("message", (message) => {
 					message.channel.send("You are already in the " + data.channels[message.channel.id].name + " queue.");
 				} else { // user is able to reg
 					data.channels[message.channel.id].peopleInQueue.push(message.author);  
-					message.channel.send(message.author.username + " has been added to the " + data.channels[message.channel.id].name + " queue. " + data.channels[message.channel.id].peopleInQueue.length + " player(s) are in the queue.");
+					message.channel.send(message.author.username + " has been added to the " + data.channels[message.channel.id].name + " queue. " + data.channels[message.channel.id].peopleInQueue.length + " player(s) in the queue.");
 					checkForMatch(message.channel); // always run a check to see if a match can be made everytime a user is added to the queue
 				}
 			}
@@ -86,7 +86,7 @@ client.on("message", (message) => {
 					let showCurrentQueuePlayers = [];
 					for (i in data.channels[message.channel.id].peopleInQueue)
 						showCurrentQueuePlayers.push(data.channels[message.channel.id].peopleInQueue[i].username);
-					message.channel.send("There are currently " + data.channels[message.channel.id].peopleInQueue.length + " player(s) in the " + data.channels[message.channel.id].name + " queue: " + showCurrentQueuePlayers.join(", "));
+					message.channel.send(data.channels[message.channel.id].peopleInQueue.length + " player(s) currently in the " + data.channels[message.channel.id].name + " queue: " + showCurrentQueuePlayers.join(", "));
 				}
 			}
 			break;
@@ -134,7 +134,7 @@ client.on("message", (message) => {
 				} // NOTE: this still cannot prevent a user being reg twice with one self reg and one freg with the user being mentioned. The two user objects are structured too differently.
 				
 				data.channels[message.channel.id].peopleInQueue.push(freg); // if the check for duplicate players passes, go ahead and freg the user
-				message.channel.send(freg.username + " has been added to the " + data.channels[message.channel.id].name + " queue. " + data.channels[message.channel.id].peopleInQueue.length + " player(s) are in the queue.");
+				message.channel.send(freg.username + " has been added to the " + data.channels[message.channel.id].name + " queue. " + data.channels[message.channel.id].peopleInQueue.length + " player(s) in the queue.");
 				checkForMatch(message.channel); // always run a check to see if a match can be made everytime a user is added to the queue
 			}
 			break;
