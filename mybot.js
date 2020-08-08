@@ -171,10 +171,11 @@ function checkForMatch(channel) { // called after every reg to check if there ar
 		return;
 		
 	matchMake(channel);
-	
 }
 
 function matchMake(channel) {
+	data.channels[channel.id].peopleWaitingReroll.length = 0; // first clear the reroll queue since there is now a new match
+	
 	if (data.channels[channel.id].peopleInQueue.length > 0) { // if the queue is not empty, put everyone in queue into reroll queue, so the matchmake command can be reused
 		for (var i = 0; i < data.channels[channel.id].peopleInQueue.length; ++i) // deep copy; reroll queue values will persist until bot shuts down or ?clear is used.
 			data.channels[channel.id].peopleWaitingReroll.push(data.channels[channel.id].peopleInQueue[i]);
