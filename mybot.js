@@ -174,11 +174,13 @@ function checkForMatch(channel) { // called after every reg to check if there ar
 }
 
 function matchMake(channel) {
-	data.channels[channel.id].peopleWaitingReroll.length = 0; // first clear the reroll queue since there is now a new match
-	
-	if (data.channels[channel.id].peopleInQueue.length > 0) { // if the queue is not empty, put everyone in queue into reroll queue, so the matchmake command can be reused
+	if (data.channels[channel.id].peopleInQueue.length == data.channels[channel.id].maxPlayerCount) { // if this is a new match, clear the reroll queue for players in the new match (if matchMake function is invoked by reroll instead, queue would have < max players)
+		data.channels[channel.id].peopleWaitingReroll.length = 0; // first clear the reroll queue since there is now a new match
+		
 		for (var i = 0; i < data.channels[channel.id].peopleInQueue.length; ++i) // deep copy; reroll queue values will persist until bot shuts down or ?clear is used.
 			data.channels[channel.id].peopleWaitingReroll.push(data.channels[channel.id].peopleInQueue[i]);
+			
+		data.channels[channel.id].peopleInQueue.length = 0; // clear the reg queue to allow another different match to be regged up
 	}
 	
 	let players = []; // temp array that stores the values of the reroll queue and used by the randomizer to generate a new rerolled array
@@ -189,8 +191,6 @@ function matchMake(channel) {
 	players = scrambler(players); // players array now contains the same values but scrambled
 	
 	channel.send("A new " + data.channels[channel.id].name + " match is ready: \nTeam 1: " + players.slice(0, players.length / 2).join(", ") + "\nTeam 2: " + players.slice(players.length / 2, players.length).join(", "));
-	
-	data.channels[channel.id].peopleInQueue.length = 0; // clear the reg queue to allow another different match to be regged up
 }
 	
 function scrambler(players) { // randomizer function
