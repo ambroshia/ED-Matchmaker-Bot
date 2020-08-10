@@ -23,9 +23,6 @@ const client = new Discord.Client();
 const private_data = require("./private_data.json");
 const data = require("./data.json");
 const prefix = data.prefix;
- 
-const id1v1 = "735309636978344047";
-const idcustom = "735309718226206720";
 
 client.on("ready", () => {
   console.log("bot is online");
