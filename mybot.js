@@ -135,6 +135,11 @@ client.on("message", (message) => {
 				checkForMatch(message.channel); // always run a check to see if a match can be made everytime a user is added to the queue
 			}
 			break;
+			
+		case 'github':
+		case 'git':
+			message.channel.send("https://github.com/ambroshia/ED-Matchmaker-Bot \nissues and pull requests welcome");
+			break;
 		
 		case 'fosel':
 		case 'fosle':
