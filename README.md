@@ -15,9 +15,9 @@ Then, copy the example data json files
 cp example-data.json data.json
 cp example-private_data.json private_data.json
 ```
-Using an editor of your choice, edit the channel ID variables in data.json to the channel IDs of your discord server. 
+Using an editor of your choice, edit the channel ID variables in `data.json` to the channel IDs of your discord server. 
 
-Then, edit the bot token variable inside private_data.json to the bot token of your application.
+Then, edit the bot token variable inside `private_data.json` to the bot token of your application.
 
 Add the bot to the server to your matchmaking server, then do `node mybot.js` to run the bot.
 
