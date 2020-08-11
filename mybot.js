@@ -110,11 +110,13 @@ client.on("message", (message) => {
 			
 		case 'freg':
 		case 'fr':
-			if (data.channels[message.channel.id].name === "1v1") { // don't proceed if freg command is called in the 1v1 channel
-				message.channel.send("Cannot force reg 1v1s");
-				break;
-			}
 			if (checkChannel(message.channel)) { // check that current channel exists in data as valid matchmaking channel
+				// 1v1 check is called after checkChannel to prevent accessing name property of a channel that does not exist in the data
+				if (data.channels[message.channel.id].name === "1v1") { // don't proceed if freg command is called in the 1v1 channel
+					message.channel.send("Cannot force reg 1v1s");
+					break;
+				}
+				
 				if (args.length === 0) { // if no freg player is specified, freg Joe
 					args.push("Joe");
 				}
@@ -156,13 +158,15 @@ client.on("message", (message) => {
 });
 
 function checkChannel(channel) { // used to check if a channel exists in the data as a valid matchmaking channel
-
-	if (data.channels[channel.id].name == "customs") { // check if its the customs channel
-		channel.send("Please use ?custom for matchmaking in customs");
-		return false;
-	} else if (data.channels[channel.id]) { // check that the channel id exists in the channels object
+	if (data.channels[channel.id]) { // check that the channel id exists in the channels object
+		// customs check is called after checking channel's existance to prevent accessing name property of a channel that does not exist in the data
+		if (data.channels[channel.id].name == "customs") { // check if its the customs channel
+			channel.send("Please use ?custom for matchmaking in customs"); 
+			return false;
+		}
 		return true;
-	} else { // if the channel is not here, don't use it
+		
+	} else { // if the channel does not exist in the data, do not try to access its properties
 		channel.send("Channel is under construction");
 		return false;
 	}
