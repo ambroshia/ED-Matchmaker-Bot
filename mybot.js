@@ -32,7 +32,7 @@ client.on("ready", () => {
 });
 
 // reset 1v1 queue after 1 hour [OLD FUNCTIONS NEED UPDATE]
-var chan1v1;
+/*var chan1v1;
 function countdown1v1() {
   chan1v1 = setTimeout(timeout, 3600000);
 }
@@ -40,7 +40,7 @@ function timeout() {
   queues["560025232375676938"].peopleInQueue.length = 0;
   client.channels.get("560025232375676938").send("1 hour has elapsed since last ?reg. The 1v1 queue has been reset.");
 }
-
+*/
 
 //event: the "message" event activates when a message is sent in any channels readable by the bot
 client.on("message", (message) => {
@@ -113,7 +113,7 @@ client.on("message", (message) => {
 			
 		case 'freg':
 		case 'fr':
-			if (message.channel.id === id1v1) { // don't proceed if freg command is called in the 1v1 channel
+			if (data.channels[message.channel.id].name === "1v1") { // don't proceed if freg command is called in the 1v1 channel
 				message.channel.send("Cannot force reg 1v1s");
 				break;
 			}
@@ -155,7 +155,7 @@ client.on("message", (message) => {
 
 function checkChannel(channel) { // used to check if a channel exists in the data as a valid matchmaking channel
 
-	if (channel.id === idcustom) { // check if its the customs channel
+	if (data.channels[channel.id].name == "customs") { // check if its the customs channel
 		channel.send("Please use ?custom for matchmaking in customs");
 		return false;
 	} else if (data.channels[channel.id]) { // check that the channel id exists in the channels object
